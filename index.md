@@ -1,76 +1,79 @@
 ---
 layout: single
-title: "Siva Cluster"
+title: ""
+author_profile: false
 permalink: /
 classes: wide
-header:
-  overlay_color: "#fdf6e3"
-  overlay_filter: 0.0
-  caption: ""
 ---
-<div class="split-landing">
-  <section class="split-col" aria-label="Work: ML, AI, Blockchain">
-    <h2>Lost in the Forest — ML, AI, Blockchain</h2>
-    <p>Research notes, experiments, and write‑ups. Click tags to jump to the related repo or filter posts.</p>
 
-    `<div class="tag-list">`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=ml" target="_blank" rel="noopener">`ml`</a>`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=ai" target="_blank" rel="noopener">`ai`</a>`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=llm" target="_blank" rel="noopener">`llm`</a>`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=rl" target="_blank" rel="noopener">`rl`</a>`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=vision" target="_blank" rel="noopener">`vision`</a>`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=blockchain" target="_blank" rel="noopener">`blockchain`</a>`
-      `<a href="/year-archive/">`all posts`</a>`
-    `</div>`
+<div class="landing-canvas">
+  <div class="center-stroke" aria-hidden="true"></div>
 
-    `<hr>`
+  <!-- LEFT PANE -->
+  <section class="pane left" aria-label="Work: ML, AI, Blockchain">
+    <h2 class="landing-title">Lost in the Forest. Random or Isolation</h2>
 
-    `<h3>`Recent posts`</h3>`
-    {% assign posts_left = site.posts | where_exp: "p", "p.categories contains 'blog'" | slice: 0, 8 %}
-    `<ul>`
-      {% for post in posts_left %}
-      `<li>`
-        `<a href="{{ post.url | relative_url }}">`{{ post.title }}`</a>`
-        `<small>` — {{ post.date | date: "%b %d, %Y" }}`</small>`
-      `</li>`
-      {% endfor %}
-    `</ul>`
+    <div class="pane-content">
+      <!-- Add left-side content here as you grow (posts, links, etc.) -->
+      <div class="tag-list">
+        <a href="https://github.com/sivacluster?tab=repositories&q=ml" target="_blank" rel="noopener">ml</a>
+        <a href="https://github.com/sivacluster?tab=repositories&q=ai" target="_blank" rel="noopener">ai</a>
+        <a href="https://github.com/sivacluster?tab=repositories&q=blockchain" target="_blank" rel="noopener">blockchain</a>
+        <a href="/year-archive/">all posts</a>
+      </div>
+    </div>
+  </section>
 
-    `<div class="footer-note">`
-      `<span>`© {{ site.time | date: "%Y" }} Siva Cluster.
-      `<span>` · 
-      `<a href="https://www.linkedin.com/in/" target="_blank" rel="noopener">`LinkedIn`</a>`
-      `<span>` · 
-      `<a href="https://www.reddit.com/user/" target="_blank" rel="noopener">`Reddit`</a>`
-      `<span>` · 
-      `<a href="https://discord.com/" target="_blank" rel="noopener">`Discord`</a>`
-    `</div>`
+  <!-- RIGHT PANE -->
+  <section class="pane right" aria-label="Markets: Stocks and Crypto">
+    <h2 class="landing-title">Being an Analyst</h2>
 
-</section>
+    <div class="pane-content">
+      <!-- Bitcoin Live -->
+      <h3 class="widget-title">Bitcoin Live</h3>
+      <div class="widget-box">
+        <!-- TradingView mini chart -->
+        <div class="tradingview-widget-container" style="height: 280px;">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {
+            "symbol": "BITSTAMP:BTCUSD",
+            "locale": "en",
+            "width": "100%",
+            "height": "280",
+            "dateRange": "12M",
+            "colorTheme": "light",
+            "trendLineColor": "#268bd2",
+            "underLineColor": "rgba(38,139,210,0.15)",
+            "isTransparent": true
+          }
+          </script>
+        </div>
+      </div>
 
-<section class="split-col" aria-label="Markets: Stocks and Crypto">
-    <h2>Being an Analyst — Stocks & Crypto</h2>
-    <p>Market theses, dashboards, and trade reviews. Long‑form notes are posted here; data and code live in linked repos.</p>
+      <!-- Fear & Greed index Live -->
+      <h3 class="widget-title">People Greed index live</h3>
+      <div class="widget-box">
+        <!-- Simple live image (cache-busted) -->
+        <img
+          src="https://alternative.me/crypto/fear-and-greed-index.png?t={{ site.time | date: '%s' }}"
+          alt="Crypto Fear & Greed Index"
+          style="max-width:100%; height:auto;"
+        />
+      </div>
+    </div>
+  </section>
 
-    `<div class="tag-list">`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=stocks" target="_blank" rel="noopener">`stocks`</a>`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=crypto" target="_blank" rel="noopener">`crypto`</a>`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=backtest" target="_blank" rel="noopener">`backtest`</a>`
-      `<a href="https://github.com/sivacluster?tab=repositories&q=notebook" target="_blank" rel="noopener">`notebooks`</a>`
-    `</div>`
-
-    `<hr>`
-
-    `<h3>`Latest analyst notes`</h3>`
-    {% assign posts_right = site.posts | where_exp: "p", "p.categories contains 'markets'" | slice: 0, 8 %}
-    `<ul>`
-      {% for post in posts_right %}
-      `<li>`
-        `<a href="{{ post.url | relative_url }}">`{{ post.title }}`</a>`
-        `<small>` — {{ post.date | date: "%b %d, %Y" }}`</small>`
-      `</li>`
-      {% endfor %}
-    `</ul>`
-
-</section>
+  <!-- BOTTOM-LEFT FOOTER -->
+  <footer class="landing-footer">
+    <div>
+      © {{ site.time | date: "%Y" }} Siva Cluster
+      <span class="sep">·</span>
+      <a href="https://www.linkedin.com/sivav/" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="sep">·</span>
+      <a href="https://www.reddit.com/user/chasingMillion" target="_blank" rel="noopener">Reddit</a>
+      <span class="sep">·</span>
+      <a href="https://discord.com/users/unbrokenideas" target="_blank" rel="noopener">Discord (@unbrokenideas)</a>
+    </div>
+  </footer>
 </div>

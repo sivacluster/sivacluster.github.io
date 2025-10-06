@@ -1,95 +1,101 @@
----
----
-// Import Minimal Mistakes theme
-@import "minimal-mistakes";
-
-/*
-  Custom overrides: Solarized Light palette + macOS system font
-  Reference: https://ethanschoonover.com/solarized/
-*/
-:root {
-  --sol-bg: #fdf6e3;        // base3
-  --sol-base: #839496;      // base0
-  --sol-text: #586e75;      // base01
-  --sol-strong: #073642;    // base02
-  --sol-accent: #268bd2;    // blue
-  --sol-accent-2: #2aa198;  // cyan
+/* Wider canvas */
+.masthead__inner-wrap,
+.initial-content,
+.page,
+.page__inner,
+.page__content,
+.wrapper {
+  max-width: 1600px;   /* adjust wider/narrower as you prefer */
+  width: 94vw;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-html, body {
-  background: var(--sol-bg);
+/* Layout canvas */
+.landing-canvas {
+  position: relative;
+  min-height: calc(100vh - 6rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 1.5rem 1rem 4.5rem; /* bottom padding for footer */
 }
 
-body,
-button,
-input,
-select,
-textarea {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  color: var(--sol-text);
+/* Center divider */
+.center-stroke {
+  position: absolute;
+  top: 8vh;
+  bottom: 10vh;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: #d6cfb2; /* light stroke on Solarized light */
+  border-radius: 2px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.pane {
+  overflow: hidden; /* pane frame; inner scrolls */
+  display: flex;
+  flex-direction: column;
+}
+
+.pane .landing-title {
+  margin: 6vh 0 2vh;
+  font-weight: 500;
   color: var(--sol-strong);
 }
 
-a {
-  color: var(--sol-accent);
+/* Independent scrolling sections */
+.pane .pane-content {
+  overflow: auto;
+  max-height: calc(100vh - 26vh);
+  padding-right: 0.5rem;
 }
 
-a:hover {
-  color: var(--sol-accent-2);
+/* Widget boxes mimic horizontal strokes from the sketch */
+.widget-title {
+  margin: 1.2rem 0 0.4rem;
+  font-weight: 500;
+  color: var(--sol-strong);
 }
 
-/* Landing page split layout */
-.split-landing {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  /* account for theme header/footer visually */
-  min-height: calc(100vh - 8rem);
+.widget-box {
+  border-top: 2px solid #d6cfb2;
+  padding-top: 0.8rem;
+  margin-bottom: 1.2rem;
 }
 
-.split-col {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid #eee8d5; /* base2 */
-  border-radius: 8px;
-  padding: 1rem;
-  overflow: auto; /* independent scrolling */
-  max-height: calc(100vh - 9rem);
-}
-
-.split-col h2 {
-  margin-top: 0.2rem;
-}
-
+/* Chips */
 .tag-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.5rem 0.6rem;
 }
 
 .tag-list a {
   background: #eee8d5; /* base2 */
   color: var(--sol-strong);
-  padding: 0.2rem 0.55rem;
+  padding: 0.22rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   text-decoration: none;
 }
 
-.footer-note {
-  margin-top: 1rem;
-  font-size: 0.85rem;
+/* Bottom-left footer */
+.landing-footer {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.8rem;
+  font-size: 0.92rem;
   color: var(--sol-base);
 }
 
-/* Responsive: stack on small screens */
+.landing-footer a { color: var(--sol-strong); text-decoration: none; }
+.landing-footer .sep { margin: 0 0.5rem; color: var(--sol-base); }
+
+/* Mobile */
 @media (max-width: 900px) {
-  .split-landing {
-    grid-template-columns: 1fr;
-  }
-  .split-col {
-    max-height: none;
-  }
+  .landing-canvas { grid-template-columns: 1fr; }
+  .center-stroke { display: none; }
+  .pane .pane-content { max-height: none; }
 }
