@@ -99,3 +99,14 @@
   .center-stroke { display: none; }
   .pane .pane-content { max-height: none; }
 }
+
+/* Live metric rows */
+.live-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin: 0.25rem 0 0.6rem;
+  }
+  .live-label { font-weight: 500; color: var(--sol-strong); }
+  .live-value { font-weight: 600; }
+  .live-delta { font-weight: 600; }

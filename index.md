@@ -1,79 +1,61 @@
----
-layout: single
-title: ""
-author_profile: false
-permalink: /
-classes: wide
----
-
-<div class="landing-canvas">
-  <div class="center-stroke" aria-hidden="true"></div>
-
-  <!-- LEFT PANE -->
-  <section class="pane left" aria-label="Work: ML, AI, Blockchain">
-    <h2 class="landing-title">Lost in the Forest. Random or Isolation</h2>
-
-    <div class="pane-content">
-      <!-- Add left-side content here as you grow (posts, links, etc.) -->
-      <div class="tag-list">
-        <a href="https://github.com/sivacluster?tab=repositories&q=ml" target="_blank" rel="noopener">ml</a>
-        <a href="https://github.com/sivacluster?tab=repositories&q=ai" target="_blank" rel="noopener">ai</a>
-        <a href="https://github.com/sivacluster?tab=repositories&q=blockchain" target="_blank" rel="noopener">blockchain</a>
-        <a href="/year-archive/">all posts</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- RIGHT PANE -->
-  <section class="pane right" aria-label="Markets: Stocks and Crypto">
-    <h2 class="landing-title">Being an Analyst</h2>
-
-    <div class="pane-content">
       <!-- Bitcoin Live -->
       <h3 class="widget-title">Bitcoin Live</h3>
-      <div class="widget-box">
-        <!-- TradingView mini chart -->
-        <div class="tradingview-widget-container" style="height: 280px;">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {
-            "symbol": "BITSTAMP:BTCUSD",
-            "locale": "en",
-            "width": "100%",
-            "height": "280",
-            "dateRange": "12M",
-            "colorTheme": "light",
-            "trendLineColor": "#268bd2",
-            "underLineColor": "rgba(38,139,210,0.15)",
-            "isTransparent": true
-          }
-          </script>
-        </div>
+      <div class="live-row">
+        <span class="live-label">BTC/USD</span>
+        <span id="btc-price" class="live-value">$—</span>
+        <span id="btc-change" class="live-delta"></span>
       </div>
-
-      <!-- Fear & Greed index Live -->
-      <h3 class="widget-title">People Greed index live</h3>
-      <div class="widget-box">
-        <!-- Simple live image (cache-busted) -->
-        <img
-          src="https://alternative.me/crypto/fear-and-greed-index.png?t={{ site.time | date: '%s' }}"
-          alt="Crypto Fear & Greed Index"
-          style="max-width:100%; height:auto;"
-        />
-      </div>
+       <div class="widget-box">
+         <!-- TradingView mini chart -->
+         <div class="tradingview-widget-container" style="height: 280px;">
+    <!-- Fear & Greed index Live -->
+    <h3 class="widget-title">People Greed index live</h3>
+    <div class="live-row">
+      <span class="live-label">Fear &amp; Greed (US)</span>
+      <span id="fng-value" class="live-value">—</span>
     </div>
-  </section>
-
-  <!-- BOTTOM-LEFT FOOTER -->
-  <footer class="landing-footer">
-    <div>
-      © {{ site.time | date: "%Y" }} Siva Cluster
-      <span class="sep">·</span>
-      <a href="https://www.linkedin.com/sivav/" target="_blank" rel="noopener">LinkedIn</a>
-      <span class="sep">·</span>
-      <a href="https://www.reddit.com/user/chasingMillion" target="_blank" rel="noopener">Reddit</a>
-      <span class="sep">·</span>
-      <a href="https://discord.com/users/unbrokenideas" target="_blank" rel="noopener">Discord (@unbrokenideas)</a>
-    </div>
+    <div class="widget-box">
+      <!-- Simple live image (cache-busted) -->
+      <img
+        src="https://alternative.me/crypto/fear-and-greed-index.png?t={{ site.time | date: '%s' }}"
+        alt="Crypto Fear & Greed Index"
+        style="max-width:100%; height:auto;"
+      />
   </footer>
 </div>
+
+<script>
+  async function fetchBTC() {
+    try {
+      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
+      const j = await r.json();
+      const p = j?.bitcoin?.usd;
+      const ch = j?.bitcoin?.usd_24h_change;
+      const priceEl = document.getElementById('btc-price');
+      const changeEl = document.getElementById('btc-change');
+      if (priceEl && typeof p === 'number') {
+        priceEl.textContent = p.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      }
+      if (changeEl && typeof ch === 'number') {
+        changeEl.textContent = (ch >= 0 ? '+' : '') + ch.toFixed(2) + '%';
+        changeEl.style.color = ch >= 0 ? '#2aa198' : '#cb4b16';
+      }
+    } catch (e) { console.error('BTC fetch failed', e); }
+  }
+
+  async function fetchFNG() {
+    try {
+      const r = await fetch('https://api.alternative.me/fng/?limit=1');
+      const j = await r.json();
+      const entry = (j && j.data && j.data[0]) || null;
+      const v = entry ? entry.value : null; // 0-100
+      const cls = entry ? entry.value_classification : '';
+      const el = document.getElementById('fng-value');
+      if (el && v !== null) el.textContent = `${v} / 100 (${cls})`;
+    } catch (e) { console.error('FNG fetch failed', e); }
+  }
+
+  function refresh() { fetchBTC(); fetchFNG(); }
+  refresh();
+  setInterval(refresh, 60000);
+</script>
