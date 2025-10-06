@@ -51,12 +51,18 @@ locale: en-US
 
 # Author / social
 author:
-  name: "Siva Cluster"
-  bio: "AI/ML portfolio."
+  name: "Siva vattikutti"
+  bio: "Lost in the Forest. Is it the Random or Isolation!"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/sivacluster"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/"
+      url: "https://www.linkedin.com/sivav/"
+    - label: "Discord · @unbrokenideas (siva)"
+      icon: "fab fa-fw fa-discord"
+      url: "https://discord.com/users/unbrokenideas"
+    - label: "Reddit"
+      icon: "fab fa-fw fa-reddit"
+      url: "https://www.reddit.com/user/chasingMillion"
