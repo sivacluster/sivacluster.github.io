@@ -1,0 +1,62 @@
+title: "Siva Cluster"
+name: "sivacluster"
+description: "Portfolio and blog"
+url: "https://sivacluster.github.io"
+baseurl: ""
+repository: "sivacluster/sivacluster.github.io"
+
+# Minimal Mistakes theme (remote)
+remote_theme: "mmistakes/minimal-mistakes"
+minimal_mistakes_skin: "default"
+
+# GitHub Pages supported plugins
+plugins:
+  - jekyll-include-cache
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-remote-theme
+
+# Content
+permalink: /:categories/:title/
+paginate: 5
+paginate_path: /page:num/
+
+collections:
+  posts:
+    output: true
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      share: true
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+include:
+  - _pages
+
+# SEO
+locale: en-US
+
+# Author / social
+author:
+  name: "Siva Cluster"
+  bio: "AI/ML portfolio."
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/sivacluster"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/"

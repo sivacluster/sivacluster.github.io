@@ -1,0 +1,95 @@
+---
+---
+// Import Minimal Mistakes theme
+@import "minimal-mistakes";
+
+/*
+  Custom overrides: Solarized Light palette + macOS system font
+  Reference: https://ethanschoonover.com/solarized/
+*/
+:root {
+  --sol-bg: #fdf6e3;        // base3
+  --sol-base: #839496;      // base0
+  --sol-text: #586e75;      // base01
+  --sol-strong: #073642;    // base02
+  --sol-accent: #268bd2;    // blue
+  --sol-accent-2: #2aa198;  // cyan
+}
+
+html, body {
+  background: var(--sol-bg);
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: var(--sol-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--sol-strong);
+}
+
+a {
+  color: var(--sol-accent);
+}
+
+a:hover {
+  color: var(--sol-accent-2);
+}
+
+/* Landing page split layout */
+.split-landing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  /* account for theme header/footer visually */
+  min-height: calc(100vh - 8rem);
+}
+
+.split-col {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid #eee8d5; /* base2 */
+  border-radius: 8px;
+  padding: 1rem;
+  overflow: auto; /* independent scrolling */
+  max-height: calc(100vh - 9rem);
+}
+
+.split-col h2 {
+  margin-top: 0.2rem;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-list a {
+  background: #eee8d5; /* base2 */
+  color: var(--sol-strong);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.footer-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--sol-base);
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .split-landing {
+    grid-template-columns: 1fr;
+  }
+  .split-col {
+    max-height: none;
+  }
+}
